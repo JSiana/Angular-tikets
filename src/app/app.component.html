@@ -5,12 +5,20 @@
 
         ) {
         <app-todo 
-        [todoData]="todo"
+            #todoRef
+            [todoData]="todo"
 
-        (onClickIcon)="getTodoInfo($event)"
+            (onClickIcon)="getTodoInfo($event)"
 
-        >
-        </app-todo>
+            >
+            <app-input placeholder="Nombres"></app-input>
+            <app-input placeholder="Apellidos"></app-input>
+            <app-input placeholder="Edad" type="number"></app-input>
+            <div class="coment" style="margin-top: 1rem;">
+                <textarea  rows="5"></textarea>
+            </div>
+             
+        </app-todo> 
 
     } @empty {
         No hay datos
@@ -22,5 +30,6 @@
 <button (click)="orderData()">Ordenar</button>
 
 <button (click)="selectTodo()">Seleccionar todo</button>
+<button (click)="addTodo()">agregar</button>
 
 <router-outlet />

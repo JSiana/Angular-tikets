@@ -1,26 +1,28 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, QueryList, ViewChild, ViewChildren, viewChildren } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { TodoComponent } from "./pages/todo/todo.component";
 import { TODO_DATA } from '../assets/todo';
 import { NTodo } from './models/todo.model';
 import { CommonModule } from '@angular/common';
+import { InputComponent } from './components/input/input.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, TodoComponent, CommonModule],
+  imports: [RouterOutlet, TodoComponent, CommonModule, InputComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  todoData = TODO_DATA.filter(item => item.id< 3);
+  todoData = TODO_DATA.filter(item => item.id< 2);
 
-  @ViewChild(TodoComponent, {read: ElementRef}) todo?: TodoComponent;
-
+  //@ViewChild('todoRef', {read: ElementRef}) todo?: ElementRef;
+    
+  @ViewChildren('todoRef', {read: ElementRef}) todo?: QueryList<ElementRef>;
 
   constructor(){
-
-  }
+    
+  } 
 
 
   getTodoInfo(val: NTodo.TodoData){
@@ -37,8 +39,14 @@ export class AppComponent {
 
 
   selectTodo(){
-    
-    console.log(this.todo)
-  }
+    console.log(this.todo);
+    // this.todo?.changes.subscribe(values => {
+    //   console.log(values);
+    // })
+  } 
 
+
+  addTodo(){
+    this.todoData = TODO_DATA.filter(item => item.id <5); 
+  }
 }
