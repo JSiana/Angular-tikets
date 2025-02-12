@@ -30,12 +30,7 @@ export class TodoComponent implements OnChanges {
     
   }
 
-
-
-
   @Input({required:true}) todoData!:NTodo.TodoData ;
-
-
 
   @Output() onClickIcon = new EventEmitter<NTodo.TodoData>();
 
